@@ -5,14 +5,16 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 class Multiplier {
+
     private static final int RANDOM_MAX_NUMBER = 1000;
+    private Random random = new Random();
 
     int calc(int x) throws ExecutionException, InterruptedException {
 
         CompletableFuture<Integer> async = CompletableFuture
                 .supplyAsync(() -> {
                             try {
-                                Thread.sleep(randomTime());
+                                Thread.sleep(getRandomTime());
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -25,9 +27,7 @@ class Multiplier {
         return async.get();
     }
 
-    private int randomTime() {
-
-        Random random = new Random();
+    private int getRandomTime() {
 
         return random.nextInt(RANDOM_MAX_NUMBER);
 
